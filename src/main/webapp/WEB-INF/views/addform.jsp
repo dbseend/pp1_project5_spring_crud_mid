@@ -9,7 +9,9 @@
 <body>
 
 <h1>Add New Post</h1>
-<form action="addform.jsp" method="post">
+<%--action에 함수명만 입력해야 상대 패스로 인식해 제대로 됨--%>
+<%--/ 사용해서 하면 절대 패스로 되서 pp1_project5_spring_crud_war가 없어짐--%>
+<form action="addok" method="post">
     <table>
         <tr>
             <td>Title:</td>
