@@ -21,6 +21,13 @@ public class BoardController {
         return "post";
     }
 
+    @GetMapping("/post")
+    public String readboard(Model model) {
+        List<BoardVO> boardList = boardService.getBoardList();
+        model.addAttribute("post", boardList);
+        return "post";
+    }
+
     @GetMapping("/add")
     public String addPost() {
         return "addform";
