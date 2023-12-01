@@ -26,7 +26,7 @@
             <td><textarea cols="50" rows="5" name="content"></textarea></td>
         </tr>
         <tr>
-            <td><a href="posts.jsp">View All Records</a></td>
+            <td><a href="post">View All Records</a></td>
             <td align="right"><input type="submit" value="Add Post"/></td>
         </tr>
     </table>

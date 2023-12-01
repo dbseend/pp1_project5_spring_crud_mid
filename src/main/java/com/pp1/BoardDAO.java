@@ -5,23 +5,26 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
 public class BoardDAO {
-    private static final String BOARD_INSERT = "INSERT INTO BOARD (title, writer, content) VALUES (?, ?, ?)";
-    private static final String BOARD_DELETE = "DELETE FROM BOARD WHERE seq=?";
-    private static final String BOARD_UPDATE = "UPDATE BOARD SET title=?, writer=?, content=? WHERE seq=?";
-    private static final String BOARD_GET = "SELECT * FROM BOARD WHERE seq=?";
-    private static final String BOARD_LIST = "SELECT * FROM BOARD ORDER BY seq DESC";
+    private static final String BOARD_INSERT = "INSERT INTO board (title, writer, content, regdate, cnt) VALUES (?, ?, ?, ?, ?)";
+    private static final String BOARD_DELETE = "DELETE FROM board WHERE seq=?";
+    private static final String BOARD_UPDATE = "UPDATE board SET title=?, writer=?, content=? WHERE seq=?";
+    private static final String BOARD_GET = "SELECT * FROM board WHERE seq=?";
+    private static final String BOARD_LIST = "SELECT * FROM board ORDER BY seq DESC";
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 
     public int insertBoard(BoardVO vo) {
         try {
-            return jdbcTemplate.update(BOARD_INSERT, vo.getTitle(), vo.getWriter(), vo.getContent());
+            Date currentDate = new Date();
+            return jdbcTemplate.update(BOARD_INSERT, vo.getTitle(), vo.getWriter(), vo.getContent(), currentDate, 0);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,6 +70,7 @@ public class BoardDAO {
             e.printStackTrace();
         }
 
+        System.out.println("빈배열");
         return new ArrayList<>();
     }
 }

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/board")
 public class BoardController {
@@ -12,10 +14,11 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
-    @GetMapping("/list")
+    @GetMapping("/post")
     public String boardList(Model model) {
-        model.addAttribute("list", boardService.getBoardList());
-        return "list";
+        List<BoardVO> boardList = boardService.getBoardList();
+        model.addAttribute("post", boardList);
+        return "post";
     }
 
     @GetMapping("/add")
@@ -31,13 +34,14 @@ public class BoardController {
             System.out.println("fail");
         }
 
-        return "redirect:list";
+        return "redirect:post";
     }
 
     @GetMapping("/edit/{id}")
     public String editPost(@PathVariable int id, Model model) {
         BoardVO boardVO = boardService.getBoard(id);
-        model.addAttribute("update", boardVO);
+        System.out.println(boardVO);
+        model.addAttribute("u", boardVO);
         return "editform";
     }
 
@@ -49,7 +53,8 @@ public class BoardController {
             System.out.println("fail");
         }
 
-        return "redirect:list";
+        //왜 redirect 사용해?
+        return "redirect:post";
     }
 
     @GetMapping("/deleteok/{id}")
@@ -60,6 +65,6 @@ public class BoardController {
             System.out.println("fail");
         }
 
-        return "redirect:../list";
+        return "post";
     }
 }
