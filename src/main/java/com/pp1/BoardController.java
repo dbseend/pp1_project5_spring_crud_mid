@@ -72,6 +72,6 @@ public class BoardController {
             System.out.println("fail");
         }
 
-        return "post";
+        return "redirect:../post";
     }
 }
